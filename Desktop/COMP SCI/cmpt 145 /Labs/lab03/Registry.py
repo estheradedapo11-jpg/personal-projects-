@@ -113,6 +113,22 @@ class Registry(object):
         # Extend the registry with the new elements, each set to the value provided
         self.__reg.extend([value] * new_elements)
 
+    def extend_by(self, count, value):
+        """
+        Purpose:
+            Extend the registry by adding a specified number of new elements.
+            The value given will be the new default value for the added registers.
+        Pre-conditions:
+            count: number of elements to add to the registry
+            value: the default initial value for all new elements
+        Post-conditions:
+            The registry is expanded by the number of elements specified in the count.
+            The new entries are set to the value provided in the argument.
+        Returns:
+            (none)
+        """
+        # Extend the registry with the new elements, each set to the value provided
+        self.__reg.extend([value] * count)
 
 import unittest
 
@@ -122,7 +138,7 @@ class TestRegistry(unittest.TestCase):
         # Step 1: Instantiate an Object
         registry = Registry()
 
-        # Step 2: Set Up Initial State
+
         registry._Registry__reg = [1, 2, 3]
 
         # Step 3: Invoke the Method
