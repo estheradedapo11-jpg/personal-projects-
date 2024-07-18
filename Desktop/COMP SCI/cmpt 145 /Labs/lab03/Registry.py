@@ -88,7 +88,7 @@ class Registry(object):
         """
         print(self.__reg)
 
-    def extend(self, size, value):
+    def extend_to(self, size, value):
         """
         Purpose:
             Extend the registry. This grows the registry to the given size.
@@ -112,3 +112,25 @@ class Registry(object):
         new_elements = size - len(self.__reg)
         # Extend the registry with the new elements, each set to the value provided
         self.__reg.extend([value] * new_elements)
+
+
+import unittest
+
+
+class TestRegistry(unittest.TestCase):
+    def test_extend(self):
+        # Step 1: Instantiate an Object
+        registry = Registry()
+
+        # Step 2: Set Up Initial State
+        registry._Registry__reg = [1, 2, 3]
+
+        # Step 3: Invoke the Method
+        registry.extend(5, 0)
+
+        # Step 4: Check the Results
+        self.assertEqual(registry._Registry__reg, [1, 2, 3, 0, 0])
+
+
+if __name__ == '__main__':
+    unittest.main()
