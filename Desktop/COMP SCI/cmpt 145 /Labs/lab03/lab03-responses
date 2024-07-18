@@ -1,0 +1,36 @@
+"""Esther Adedapo
+NSID: fxy319
+Student Number: 11366614
+Instructor: Alexander Dumais
+Lab Section: L02"""
+
+
+Answers to the Questions
+1. Do you prefer to use extend_to or extend_by?
+I prefer extend_by because it allows for adding a specific number of elements without needing to know the current size of the registry. It is more flexible and convenient for incremental additions.
+
+2. Is it useful to have both methods? Why?
+Yes, having both methods is useful because they serve different purposes. extend_to ensures the registry reaches a specific size, which is useful when the exact size is important. extend_by allows for adding a precise number of elements, which is helpful for dynamic growth.
+
+3. Could the additional coupons be collected in coupon-collector.py (lines 40+) without adding an extend method? Explain why.
+Yes, additional coupons could be collected by directly manipulating the list (e.g., appending new elements). However, using methods like extend_by or extend_to makes the code cleaner, more modular, and easier to maintain by encapsulating the logic for extending the registry.
+
+4. In your opinion, should either of the extend methods exist?
+Yes, both methods should exist because they encapsulate the logic for extending the registry, making the code more modular, reusable, and easier to maintain.
+
+5. How did you test your extend method?
+I tested by:
+
+Verifying extend_to correctly extends the registry to a larger size.
+Verifying extend_by correctly adds a specific number of new elements.
+Checking boundary conditions to ensure proper error handling.
+Ensuring that existing elements in the registry are not altered after extension.
+
+
+Git Log
+
+
+
+
+
+
