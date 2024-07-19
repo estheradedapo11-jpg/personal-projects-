@@ -82,7 +82,7 @@
         return self.__count """
 
 
-# Modified Changes
+# Modeified
 class Statistics:
     def __init__(self):
         self.data = []
