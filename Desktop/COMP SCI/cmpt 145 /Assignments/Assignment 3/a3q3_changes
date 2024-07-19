@@ -1,0 +1,22 @@
+"""Esther Adedapo
+NSID: fxy319
+Student Number: 11366614
+Instructor: Alexander Dumais
+Lecture Section: L02"""
+
+
+1. Added `range()` method:
+   - Returns the range (difference between the minimum and maximum) based on every value recorded.
+   - Returns None if no data is present.
+
+2. Added `mode()` method:
+   - Returns the mode (the value that occurs most frequently) based on every value recorded.
+   - Returns None if no data is present.
+
+3. Added `max()` method:
+   - Returns the maximum value ever recorded.
+   - Returns None if no data is present.
+
+4. Added `min()` method:
+   - Returns the minimum value ever recorded.
+   - Returns None if no data is present.
