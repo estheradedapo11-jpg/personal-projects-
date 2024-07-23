@@ -39,3 +39,35 @@ def check_chains(chain1, chain2):
         return "same values"
 
     return "different"
+
+
+
+def copync(node_chain):
+    """
+    Purpose:
+    - Creates a duplicate of the given node chain.
+
+    Preconditions:
+    - node_chain: A node-chain, possibly empty.
+
+    Postconditions: None
+
+    Return:
+    - A new node chain, a node-for-node copy of the given one.
+    """
+    if node_chain is None:
+        return None
+
+    # Create the head of the new chain
+    new_chain = node(node_chain.get_data())
+    current_new = new_chain
+    current_old = node_chain.get_next()
+
+    # Copy the rest of the chain
+    while current_old is not None:
+        current_new.set_next(node(current_old.get_data()))
+        current_new = current_new.get_next()
+        current_old = current_old.get_next()
+
+    return new_chain
+
