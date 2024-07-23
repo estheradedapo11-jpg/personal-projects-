@@ -71,3 +71,29 @@ def copync(node_chain):
 
     return new_chain
 
+def double_up(node_chain):
+    """
+    Purpose:
+    - Modifies the node chain so that every node is duplicated.
+    - E.g., given 1 -> 2 -> 3 changes to 1 -> 1 -> 2 -> 2 -> 3 -> 3.
+
+    Preconditions:
+    - node_chain: A node-chain, possibly empty.
+
+    Postconditions:
+    - The chain is modified to have each node repeated once.
+
+    Return:
+    - None
+    """
+    current = node_chain
+
+    while current is not None:
+        # Create a duplicate node
+        duplicate = node(current.get_data())
+        # Insert the duplicate node after the current node
+        duplicate.set_next(current.get_next())
+        current.set_next(duplicate)
+        # Move to the node after the duplicate
+        current = duplicate.get_next()
+
