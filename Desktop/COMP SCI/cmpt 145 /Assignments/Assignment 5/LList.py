@@ -163,7 +163,22 @@ def remove_from_back(self):
             :return The pair True, value if self is not empty
             :return The pair False, None if self is empty
         """
-        pass
+        if self.is_empty():
+            return (False, None)
+        if self._size == 1:
+            value = self._tail.data
+            self._head = None
+            self._tail = None
+            self._size -= 1
+            return (True, value)
+        current = self._head
+        while current.next != self._tail:
+            current = current.next
+        value = self._tail.data
+        self._tail = current
+        self._tail.next = None
+        self._size -= 1
+        return (True, value)
 
     def retrieve_data(self, idx):
         """
@@ -177,9 +192,15 @@ def remove_from_back(self):
             :return (True, val) if val is stored at index idx and idx is valid
             :return (False, None) if the idx is not valid for the list
         """
-        pass
+        if idx < 0 or idx >= self._size:
+            return (False, None)
+        current = self._head
+        for _ in range(idx):
+            current = current.next
+        return (True, current.data)
 
-    def set_data(self, idx, val):
+
+def set_data(self, idx, val):
         """
         Purpose
             Store val at the index idx
@@ -191,5 +212,11 @@ def remove_from_back(self):
         Return:
             :return True if the index was valid, False otherwise
         """
-        pass
+        if idx < 0 or idx >= self._size:
+            return False
+        current = self._head
+        for _ in range(idx):
+            current = current.next
+        current.data = val
+        return True
 
