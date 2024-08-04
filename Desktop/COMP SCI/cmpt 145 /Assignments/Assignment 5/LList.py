@@ -83,7 +83,11 @@ class LList(object):
         Return:
             :return None
         """
-        pass
+        new_node = node(val, self._head)
+        if self.is_empty():
+            self._tail = new_node
+        self._head = new_node
+        self._size += 1
 
     def append(self, val):
         """
@@ -97,10 +101,12 @@ class LList(object):
         Return:
             :return None
         """
-        new_node = node(val, self._head)
+        new_node = node(val)
         if self.is_empty():
-            self._tail = new_node
-        self._head = new_node
+            self._head = new_node
+        else:
+            self._tail.next = new_node
+        self._tail = new_node
         self._size += 1
 
 
@@ -116,7 +122,14 @@ class LList(object):
             :return True, idx if the val appears in self
             :return False, None if the vale does not appear in self
         """
-        pass
+        current = self._head
+        index = 0
+        while current:
+            if current.data == val:
+                return (True, index)
+            current = current.next
+            index += 1
+        return (False, None)
 
     def remove_from_front(self):
         """
@@ -129,9 +142,17 @@ class LList(object):
             :return The pair (True, value) if self is not empty
             :return The pair (False, None) if self is empty
         """
-        pass
+        if self.is_empty():
+            return (False, None)
+        value = self._head.data
+        self._head = self._head.next
+        if self.is_empty():
+            self._tail = None
+        self._size -= 1
+        return (True, value)
 
-    def remove_from_back(self):
+
+def remove_from_back(self):
         """
         Purpose
             Removes and returns the last value
