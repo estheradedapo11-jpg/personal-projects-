@@ -1,0 +1,45 @@
+"""Esther Adedapo
+NSID: fxy319
+Student Number: 11366614
+Instructor: Alexander Dumais
+Lab Section: L02"""
+
+
+class treenode:
+    def __init__(self, data, left=None, right=None):
+        """
+        Purpose:
+            Initialize a new treenode with the given data and optional left and right children.
+        Pre-conditions:
+            data: The data value to be stored in the node (any type).
+            left: A reference to the left child (another treenode or None).
+            right: A reference to the right child (another treenode or None).
+        Post-conditions:
+            A new treenode is created with the specified data, left child, and right child.
+        Returns:
+            None
+        """
+        self.data = data
+        self.left = left
+        self.right = right
+
+
+def mirrored(t1, t2):
+    """
+    Purpose:
+        Determine if two binary trees satisfy the mirror property.
+    Pre-conditions:
+        t1: A treenode or None.
+        t2: A treenode or None.
+    Post-conditions:
+        The trees are checked to see if they satisfy the mirror property.
+    Returns:
+        True if the trees satisfy the mirror property, False otherwise.
+    """
+    if t1 is None and t2 is None:
+        return True
+    if t1 is None or t2 is None:
+        return False
+    return (t1.data == t2.data and
+            mirrored(t1.left, t2.right) and
+            mirrored(t1.right, t2.left))
