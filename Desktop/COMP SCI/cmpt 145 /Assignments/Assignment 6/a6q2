@@ -1,0 +1,100 @@
+"""Esther Adedapo
+NSID: fxy319
+Student Number: 11366614
+Instructor: Alexander Dumais
+Lab Section: L02"""
+
+
+class treenode(object):
+
+    def __init__(self, data, left=None, right=None):
+        """
+        Create a new treenode for the given data.
+        Pre-conditions:
+            data:  Any data value to be stored in the treenode
+            left:  Another treenode (or None, by default)
+            right:  Another treenode (or None, by default)
+        """
+        self.data = data
+        self.left = left
+        self.right = right
+
+    def replace(tnode, t, r):
+        """
+        Purpose:
+            Replace every occurrence of the target value t with the replacement value r in the tree.
+        Pre-conditions:
+            tnode: A treenode or None.
+            t: The target value to be replaced (any data type that can be stored in the tree).
+            r: The replacement value (same data type as t).
+        Post-conditions:
+            Every occurrence of the target value t in the tree is replaced with the value r.
+            The tree is modified in place.
+        Returns:
+            None
+        """
+        if tnode is None:
+            return
+        if tnode.data == t:
+            tnode.data = r
+        replace(tnode.left, t, r)
+        replace(tnode.right, t, r)
+
+    def mirror_copy(tnode):
+        """
+        Purpose:
+            Create a mirrored copy of the given tree with new treenodes, where left and right children are swapped.
+        Pre-conditions:
+            tnode: A treenode or None.
+        Post-conditions:
+            A new tree is created with the same data values as the original tree, but the left and right children
+            of every node are swapped.
+        Returns:
+            The root node of the new mirrored tree, or None if the input tnode is None.
+        """
+        if tnode is None:
+            return None
+        new_left = mirror_copy(tnode.right)
+        new_right = mirror_copy(tnode.left)
+        return treenode(tnode.data, new_left, new_right)
+
+    def collect_data_preorder(tnode):
+        """
+        Purpose:
+            Collect all data values in the tree in pre-order sequence.
+        Pre-conditions:
+            tnode: A treenode or None.
+        Post-conditions:
+            The data values are collected in a list according to pre-order traversal.
+        Returns:
+            A list of data values in pre-order sequence, or an empty list if the tree is empty.
+        """
+        if tnode is None:
+            return []
+        left_values = collect_data_preorder(tnode.left)
+        right_values = collect_data_preorder(tnode.right)
+        return [tnode.data] + left_values + right_values
+
+    def count_larger(tnode, target):
+        """
+        Purpose:
+            Count the number of data values in the tree that are greater than the target value.
+        Pre-conditions:
+            tnode: A treenode or None.
+            target: A value to compare against (assumed to be a number).
+        Post-conditions:
+            The number of nodes in the tree with a data value greater than the target is counted.
+        Returns:
+            An integer representing the count of data values greater than the target value, or 0 if the tree is empty.
+        """
+        if tnode is None:
+            return 0
+        count = 1 if tnode.data > target else 0
+        count += count_larger(tnode.left, target)
+        count += count_larger(tnode.right, target)
+        return count
+
+
+
+
+
