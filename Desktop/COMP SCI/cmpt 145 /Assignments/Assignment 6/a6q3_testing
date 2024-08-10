@@ -1,0 +1,44 @@
+"""Esther Adedapo
+NSID: fxy319
+Student Number: 11366614
+Instructor: Alexander Dumais
+Lab Section: L02"""
+
+
+from a6q3 import treenode, mirrored
+
+def test_mirrored():
+    """
+    Purpose:
+        Test cases for the mirrored() function.
+    """
+    # Test 1: Both trees are empty
+    assert mirrored(None, None) == True, "Test 1 Failed"
+
+    # Test 2: One tree is empty, the other is not
+    t1 = treenode(1)
+    assert mirrored(t1, None) == False, "Test 2 Failed"
+    assert mirrored(None, t1) == False, "Test 2 Failed"
+
+    # Test 3: Trees with one node, mirror property satisfied
+    t2 = treenode(1)
+    assert mirrored(t1, t2) == True, "Test 3 Failed"
+
+    # Test 4: Trees with one node, mirror property not satisfied
+    t3 = treenode(2)
+    assert mirrored(t1, t3) == False, "Test 4 Failed"
+
+    # Test 5: Trees with multiple nodes, mirror property satisfied
+    t4 = treenode(1, treenode(2), treenode(3))
+    t5 = treenode(1, treenode(3), treenode(2))
+    assert mirrored(t4, t5) == True, "Test 5 Failed"
+
+    # Test 6: Trees with multiple nodes, mirror property not satisfied
+    t6 = treenode(1, treenode(2), treenode(4))
+    assert mirrored(t4, t6) == False, "Test 6 Failed"
+
+    print("All mirrored() tests passed.")
+
+if __name__ == "__main__":
+    test_mirrored()
+    print("All tests passed.")
