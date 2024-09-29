@@ -5,13 +5,14 @@ Instructor: Kemin Wang
 Lecture Section: L01*/
 
 import java.util.Scanner;
+
 public class GradeCalculator {
     public static void main(String[] args){
         // Declare variables
         String courseName;
         int quiz = 0, totalQuiz = 0;
         int assignment = 0, totalAssignments = 0;
-        int midterm = 0, labExam = 0, finalExam = 0;
+        int midterm = 0, totalLabExam = 0, finalExam = 0;
         int quizCount = 0, assignmentCount = 0, labExamCount = 0;
         int quizPercentage = 0, assignmentPercentage = 0, midtermPercentage = 0, labExamPercentage = 0, finalExamPercentage = 0;
         boolean exit = false;
@@ -85,8 +86,8 @@ public class GradeCalculator {
                 for (int i = 0; i < labExamCount; i++) {
                     System.out.print("Enter grade for lab exam " + (i + 1) + ": ");
                     String labExamInput = input.nextLine();
-                    labExam = labExamInput.isEmpty() ? 0 : Integer.parseInt(labExamInput);
-                    totalQuiz += labExam;
+                    int labExam = labExamInput.isEmpty() ? 0 : Integer.parseInt(labExamInput);
+                    totalLabExam += labExam;
                 }
 
                 System.out.print("Enter the total weight percentage of lab exams: ");
@@ -111,12 +112,19 @@ public class GradeCalculator {
             }
         }
 
-      int assignmentcalulation = totalassignments / 7;
-      int quizcalulation = totalquiz / 26;
-      double finalgrade = (quizcalulation * 0.05) + (assignmentcalulation * 0.15) + (midterm * 0.15) + (labexam * 0.05) + (labexam2 * 0.15) + (finalexam * 0.45);
-      System.out.println(courseName + "Final Grade: " + finalgrade);
+        // Calculate averages and handle division by zero
+        int assignmentCalculation = assignmentCount == 0 ? 0 : totalAssignments / assignmentCount;
+        int quizCalculation = quizCount == 0 ? 0 : totalQuiz / quizCount;
+        int labExamCalculation = labExamCount == 0 ? 0 : totalLabExam / labExamCount;
 
+        // Calculate final grade using weight percentages
+        double finalGrade = (quizCalculation * (quizPercentage / 100.0)) +
+                            (assignmentCalculation * (assignmentPercentage / 100.0)) +
+                            (midterm * (midtermPercentage / 100.0)) +
+                            (labExamCalculation * (labExamPercentage / 100.0)) +
+                            (finalExam * (finalExamPercentage / 100.0));
 
+        // Output the final grade
+        System.out.println(courseName + " Final Grade: " + finalGrade);
     }
-    }
-
+}
