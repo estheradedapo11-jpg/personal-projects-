@@ -10,7 +10,7 @@ public class GradeCalculator {
        int midterm = 0;
        int labexam = 0;
        int labexam2 = 0;
-       int finalexam =0;
+       int finalexam = 0;
        int assignmentcount = 0;
        int quizcount= 0;
        boolean exit= false;
@@ -18,10 +18,14 @@ public class GradeCalculator {
        System.out.print("Enter Course Name: ");
        courseName = input.nextLine();
       while (!exit) {
-          while (quizcount != 26) {
-              System.out.print("Enter Grade for quizes: ");
-              String quizInput = input.nextLine();
-              if (quizInput.isEmpty()) {
+          System.out.print("Enter Q for Quiz, A for Assignments, M for midterm, L for lab exam, F for final exam : ");
+              String optionInput = input.nextLine();
+              if (optionInput.equalsIgnoreCase("Q")) {
+                  System.out.print("How many Quizes are there?");
+                  quizcount = input.nextInt();
+                  for (quizcount, quizcount, +1)
+
+                  if (quizInput.isEmpty()) {
                   quiz = 0;
               }
               else {
