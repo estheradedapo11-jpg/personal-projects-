@@ -1,95 +1,115 @@
-import java.util.Scanner;
+/*Esther Adedapo
+NSID: fxy319
+Student Number: 11366614
+Instructor: Kemin Wang
+Lecture Section: L01*/
 
+import java.util.Scanner;
 public class GradeCalculator {
     public static void main(String[] args){
-       String courseName;
-       int quiz= 0;
-       int totalquiz = 0;
-       int assignment = 0;
-       int totalassignments = 0;
-       int midterm = 0;
-       int labexam = 0;
-       int labexam2 = 0;
-       int finalexam = 0;
-       int assignmentcount = 0;
-       int quizcount= 0;
-       boolean exit= false;
-       Scanner input = new Scanner(System.in);
-       System.out.print("Enter Course Name: ");
-       courseName = input.nextLine();
-      while (!exit) {
-          System.out.print("Enter Q for Quiz, A for Assignments, M for midterm, L for lab exam, F for final exam : ");
-              String optionInput = input.nextLine();
-              if (optionInput.equalsIgnoreCase("Q")) {
-                  System.out.print("How many Quizes are there?");
-                  quizcount = input.nextInt();
-                  for (quizcount, quizcount, +1)
+        // Declare variables
+        String courseName;
+        int quiz = 0, totalQuiz = 0;
+        int assignment = 0, totalAssignments = 0;
+        int midterm = 0, labExam = 0, finalExam = 0;
+        int quizCount = 0, assignmentCount = 0, labExamCount = 0;
+        int quizPercentage = 0, assignmentPercentage = 0, midtermPercentage = 0, labExamPercentage = 0, finalExamPercentage = 0;
+        boolean exit = false;
 
-                  if (quizInput.isEmpty()) {
-                  quiz = 0;
-              }
-              else {
-                  quiz = Integer.parseInt(quizInput);
-              }
+        // Scanner for input
+        Scanner input = new Scanner(System.in);
 
-              totalquiz = totalquiz + quiz;
-              quizcount = quizcount + 1;
-          }
-          while (assignmentcount != 7) {
-              System.out.print("Enter Grade for assignments: ");
-              String assignmentInput = input.nextLine();
-              if (assignmentInput.isEmpty()) {
-                  assignment = 0;
-              } else {
-                  assignment = Integer.parseInt(assignmentInput);
-              }
+        // Get course name
+        System.out.print("Enter Course Name: ");
+        courseName = input.nextLine();
 
-              totalassignments = totalassignments + assignment;
-              assignmentcount = assignmentcount + 1;
-          }
+        // Looping menu
+        while (!exit) {
+            System.out.println("Menu: ");
+            System.out.print("Enter Q for Quiz, A for Assignments, M for Midterm, L for Lab Exam, F for Final Exam, or quit to exit: ");
+            String optionInput = input.nextLine();
 
-          System.out.print("Enter Grade for midterm: ");
-          String midtermInput = input.nextLine();
-              if (midtermInput.isEmpty()) {
-                  midterm = 0;
-              }
-              else {
-                  midterm = Integer.parseInt(midtermInput);
-              }
+            // Input for Quizzes
+            if (optionInput.equalsIgnoreCase("Q")) {
+                System.out.print("How many quizzes are there? ");
+                quizCount = input.nextInt();
+                input.nextLine();  // Consume newline
 
-          System.out.print("Enter Grade for lab exam one: ");
-          String labexamInput = input.nextLine();
-              if (labexamInput.isEmpty()) {
-                  labexam = 0;
-              }
-              else {
-                  labexam = Integer.parseInt(labexamInput);
-              }
-          System.out.print("Enter Grade for lab exam two: ");
-              String labexam2Input = input.nextLine();
-              if (labexam2Input.isEmpty()) {
-                  labexam2 = 0;
-              }
-              else {
-                  labexam2 = Integer.parseInt(labexam2Input);
-              }
-          System.out.print("Enter Grade for finalexam: ");
-          String finalexamInput = input.nextLine();
-              if (finalexamInput.isEmpty()) {
-                  finalexam = 0;
-              }
-              else {
-                  finalexam= Integer.parseInt(finalexamInput);
-              }
+                for (int i = 0; i < quizCount; i++) {
+                    System.out.print("Enter grade for quiz " + (i + 1) + ": ");
+                    String quizInput = input.nextLine();
+                    quiz = quizInput.isEmpty() ? 0 : Integer.parseInt(quizInput);
+                    totalQuiz += quiz;
+                }
 
-          System.out.print("Type 'quit' to exit or press Enter to continue: ");
-            String quitOption = input.nextLine();
-            if (quitOption.equalsIgnoreCase("quit")) {
-                exit = true;
+                System.out.print("Enter the total weight percentage of quizzes: ");
+                quizPercentage = input.nextInt();
+                input.nextLine();  // Consume newline
             }
 
+            // Input for Assignments
+            else if (optionInput.equalsIgnoreCase("A")) {
+                System.out.print("How many assignments are there? ");
+                assignmentCount = input.nextInt();
+                input.nextLine();  // Consume newline
 
-      }
+                for (int i = 0; i < assignmentCount; i++) {
+                    System.out.print("Enter grade for assignment " + (i + 1) + ": ");
+                    String assignmentInput = input.nextLine();
+                    assignment = assignmentInput.isEmpty() ? 0 : Integer.parseInt(assignmentInput);
+                    totalAssignments += assignment;
+                }
+
+                System.out.print("Enter the total weight percentage of assignments: ");
+                assignmentPercentage = input.nextInt();
+                input.nextLine();  // Consume newline
+            }
+
+            // Input for Midterm
+            else if (optionInput.equalsIgnoreCase("M")) {
+                System.out.print("Enter grade for the midterm: ");
+                String midtermInput = input.nextLine();
+                midterm = midtermInput.isEmpty() ? 0 : Integer.parseInt(midtermInput);
+
+                System.out.print("Enter the weight percentage of the midterm: ");
+                midtermPercentage = input.nextInt();
+                input.nextLine();  // Consume newline
+            }
+
+            // Input for Lab Exams
+            else if (optionInput.equalsIgnoreCase("L")) {
+                System.out.print("How many lab exams are there? ");
+                labExamCount = input.nextInt();
+                input.nextLine();  // Consume newline
+
+                for (int i = 0; i < labExamCount; i++) {
+                    System.out.print("Enter grade for lab exam " + (i + 1) + ": ");
+                    String labExamInput = input.nextLine();
+                    labExam = labExamInput.isEmpty() ? 0 : Integer.parseInt(labExamInput);
+                    totalQuiz += labExam;
+                }
+
+                System.out.print("Enter the total weight percentage of lab exams: ");
+                labExamPercentage = input.nextInt();
+                input.nextLine();  // Consume newline
+            }
+
+            // Input for Final Exam
+            else if (optionInput.equalsIgnoreCase("F")) {
+                System.out.print("Enter grade for the final exam: ");
+                String finalExamInput = input.nextLine();
+                finalExam = finalExamInput.isEmpty() ? 0 : Integer.parseInt(finalExamInput);
+
+                System.out.print("Enter the weight percentage of the final exam: ");
+                finalExamPercentage = input.nextInt();
+                input.nextLine();  // Consume newline
+            }
+
+            // Quit option
+            else if (optionInput.equalsIgnoreCase("quit")) {
+                exit = true; // Exit loop
+            }
+        }
 
       int assignmentcalulation = totalassignments / 7;
       int quizcalulation = totalquiz / 26;
