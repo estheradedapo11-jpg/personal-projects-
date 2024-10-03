@@ -4,8 +4,8 @@ Student Number: 11366614
 Instructor: Kemin Wang
 Lecture Section: L01*/
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class GradeCalculator {void main(String[] args) {
      class Course{
@@ -19,7 +19,19 @@ public class GradeCalculator {void main(String[] args) {
         private int labExm2;
         private int FinalExam;
 
+         /** Constructor for Course Object, initialize name, assignments and quizzes
+          * @param name
+          * @param numAssignments
+          * @param numQuizzes
+          */
         public Course(String name, int numAssignments, int numQuizzes ) {
+            this.courseName = name;
+            this.assignments = new ArrayList<Integer>();
+            
+         }
+
+
+         public void addAssignment(int total, int score) {
 
          }
     }
