@@ -156,4 +156,13 @@ public class GradeCalculator {
             super(total, score);
         }
     }
+    static class FinalExam extends Exam {
+        public FinalExam(int total, int score) {
+            super(total, score);
+        }
+        @Override
+        public String toString() {
+            return super.toString();
+        }
+    }
 }
