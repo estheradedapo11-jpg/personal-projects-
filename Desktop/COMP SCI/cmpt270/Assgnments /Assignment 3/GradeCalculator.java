@@ -6,8 +6,11 @@
 
 import java.util.ArrayList; // Import ArrayList
 
+
+
 public class GradeCalculator {
     public static void main(String[] args) {
+
         // Main method can be used for testing or running the application
     }
 
@@ -41,35 +44,45 @@ public class GradeCalculator {
             this.quizIdx = 0; /** Start index at 0 */
         }
 
-        public void addAssignment(int total, int score) {
-            this.assignments.add(new Assignment(total, score));
+        public void addAssignment(int score, int total) {
+            this.assignments.add(new Assignment(score, total));
         }
 
-        public void addQuiz(int total, int score) {
-            this.quizzes.add(new Quiz(total, score));
+        public void addQuiz(int score, int total) {
+            this.quizzes.add(new Quiz(score, total));
         }
 
-        public void addMidterm(int total, int score) {
-            this.midterm = new Exam(total, score);
+        public void addMidterm(int score, int total) {
+            this.midterm = new Exam(score, total);
         }
 
-        public void addLabExam(int examNumber, int total, int score) {
+        public void addLabExam(int examNumber, int score, int total) {
             if (examNumber == 1) {
-                this.labExam1 = new LabExam(total, score);
+                this.labExam1 = new LabExam(score, total);
             } else if (examNumber == 2) {
-                this.labExam2 = new LabExam(total, score);
+                this.labExam2 = new LabExam(score, total);
             } else {
                 System.out.println("Invalid exam number");
             }
         }
 
-        public void addFinalExam(int total, int score) {
-            this.finalExam = new Exam(total, score);
+        public void addFinalExam(int score, int total) {
+            this.finalExam = new Exam(score, total);
         }
 
         public double getFinalGrade() {
-            // Placeholder for actual final grade calculation
-            return 0; // Replace with actual calculation logic
+            double assignmentcalculation = 0;
+            for (Assignment assignments:assignments){
+                assignmentcalculation += assignments.getScore();
+            }
+            double quizcalculation = 0;
+            for (Quiz quizzes : quizzes){
+                quizcalculation += quizzes.getScore();
+            }
+
+            double finalGrade = (assignmentcalculation * 0.15) + (quizcalculation * 0.05) + (labExam1.getPercentage() * 0.05) +
+                    (labExam2.getPercentage() * 0.15) + (midterm.getPercentage() * 0.15) + (finalExam.getPercentage() * 0.45);
+            return finalGrade;
         }
 
         public String getCourseName() {
@@ -179,7 +192,7 @@ public class GradeCalculator {
 
         @Override
         public String toString() {
-            return "Midterm: " + getPercentage();
+            return "Midterm: "  + getPercentage();
         }
     }
 
