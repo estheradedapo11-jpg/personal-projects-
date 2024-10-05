@@ -72,14 +72,24 @@ public class GradeCalculator {
 
         public double getFinalGrade() {
             double assignmentcalculation = 0;
+            double scoreassigmentcalculation = 0;
+            double totalassigmentcalculation = 0;
             for (Assignment assignments:assignments){
-                assignmentcalculation += assignments.getScore();
+                scoreassigmentcalculation += assignments.getScore();
+                totalassigmentcalculation += assignments.getTotal();
+
             }
+            assignmentcalculation = scoreassigmentcalculation / totalassigmentcalculation;
+
+            double scorequizcalculation = 0;
+            double totalquizcalculation = 0;
             double quizcalculation = 0;
             for (Quiz quizzes : quizzes){
-                quizcalculation += quizzes.getScore();
+                scorequizcalculation += quizzes.getScore();
+                totalquizcalculation += quizzes.getTotal();
             }
-
+            quizcalculation = scorequizcalculation / totalquizcalculation;
+            
             double finalGrade = (assignmentcalculation * 0.15) + (quizcalculation * 0.05) + (labExam1.getPercentage() * 0.05) +
                     (labExam2.getPercentage() * 0.15) + (midterm.getPercentage() * 0.15) + (finalExam.getPercentage() * 0.45);
             return finalGrade;
