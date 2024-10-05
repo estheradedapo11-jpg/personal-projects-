@@ -33,11 +33,11 @@ public class GradeCalculator {
             this.courseName = name;
 
             /** Initialize the assignments array */
-            this.assignments = new ArrayList<>(numAssignments);
+            this.assignments = new ArrayList<Assignment>(numAssignments);
             this.assignmentIdx = 0; /** Start index at 0 */
 
             /** Initialize the quizzes array */
-            this.quizzes = new ArrayList<>(numQuizzes);
+            this.quizzes = new ArrayList<Quiz>(numQuizzes);
             this.quizIdx = 0; /** Start index at 0 */
         }
 
@@ -78,8 +78,40 @@ public class GradeCalculator {
 
         @Override
         public String toString() {
-            return "Course: " + courseName + ", Final Grade: " + getFinalGrade();
+        String result = "Course: " + courseName + "\nAssignments:\n";
+
+           // Iterate through assignments
+        for (Assignment assignment : assignments) {
+            result += (assignment.toString()) + ("\n");
         }
+
+        // Iterate through quizzes
+        result +=("Quizzes:\n");
+        for (Quiz quiz : quizzes) {
+            result += (quiz.toString()) + ("\n");
+        }
+
+        // Print Midterm
+        if (midterm != null) {
+            result += ("Midterm: ") + (midterm.toString()) + ("\n");
+        }
+
+        // Print Lab Exams
+        if (labExam1 != null) {
+            result += ("Lab Exam 1: ")+ (labExam1.toString()) + ("\n");
+        }
+        if (labExam2 != null) {
+            result+= ("Lab Exam 2: ") + (labExam2.toString()) + ("\n");
+        }
+
+        // Print Final Exam
+        if (finalExam != null) {
+            result += ("Final Exam: ") + (finalExam.toString()) + ("\n");
+        }
+
+        return result.toString();
+    }
+
     }
 
     static class Assessment {
@@ -147,13 +179,17 @@ public class GradeCalculator {
 
         @Override
         public String toString() {
-            return super.toString();
+            return "Midterm: " + getPercentage();
         }
     }
 
     static class LabExam extends Exam {
         public LabExam(int total, int score) {
             super(total, score);
+        }
+        @Override
+        public String toString() {
+            return "Lab Exam: " + getPercentage();
         }
     }
     static class FinalExam extends Exam {
@@ -162,7 +198,7 @@ public class GradeCalculator {
         }
         @Override
         public String toString() {
-            return super.toString();
+            return "Final Exam: " + getPercentage();
         }
     }
 }
