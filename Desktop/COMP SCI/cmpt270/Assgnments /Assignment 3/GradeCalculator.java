@@ -4,44 +4,55 @@
  Instructor: Kemin Wang
  Lecture Section: L01 */
 
-import java.util.ArrayList; // Import ArrayList
-
-
+import java.util.ArrayList;
 
 public class GradeCalculator {
     public static void main(String[] args) {
 
-        // Main method can be used for testing or running the application
+        // Test Assessment class
+        Assessment assessment = new Assessment(50, 40);
+        if (!(assessment.getScore() == 40 && assessment.getTotal() == 50)) {
+            System.out.println("Assessment Test Failed");
+        }
+
+        // Test Exam class
+        Exam exam = new Exam(100, 85);
+        if (!(exam.getPercentage() == 85.0)) {
+            System.out.println("Exam Percentage Test Failed");
+        }
+
+        // Test Course final grade calculation
+        Course course = new Course("CSC101", 2, 2);
+        course.addAssignment(90, 100);
+        course.addAssignment(80, 100);
+        course.addQuiz(70, 100);
+        course.addQuiz(60, 100);
+        course.addMidterm(85, 100);
+        course.addLabExam(1, 75, 100);
+        course.addLabExam(2, 65, 100);
+        course.addFinalExam(90, 100);
+
+        // Expected final grade
+        double expectedFinalGrade = (0.15 * 85) + (0.05 * 65) + (0.05 * 75) + (0.15 * 65) + (0.15 * 85) + (0.45 * 90);
+
+        if (course.getFinalGrade() != expectedFinalGrade) {
+            System.out.println("Course Final Grade Calculation Test Failed");
+        }
     }
 
     static class Course {
         private String courseName;
         private ArrayList<Assignment> assignments;
-        private int assignmentIdx;
         private ArrayList<Quiz> quizzes;
-        private int quizIdx;
         private Exam midterm;
         private LabExam labExam1;
         private LabExam labExam2;
         private Exam finalExam;
 
-        /**
-         * Constructor for Course Object, initialize name, assignments, and quizzes
-         *
-         * @param name           the name of the course
-         * @param numAssignments the number of assignments in the course
-         * @param numQuizzes     the number of quizzes in the course
-         */
         public Course(String name, int numAssignments, int numQuizzes) {
             this.courseName = name;
-
-            /** Initialize the assignments array */
-            this.assignments = new ArrayList<Assignment>(numAssignments);
-            this.assignmentIdx = 0; /** Start index at 0 */
-
-            /** Initialize the quizzes array */
-            this.quizzes = new ArrayList<Quiz>(numQuizzes);
-            this.quizIdx = 0; /** Start index at 0 */
+            this.assignments = new ArrayList<>(numAssignments);
+            this.quizzes = new ArrayList<>(numQuizzes);
         }
 
         public void addAssignment(int score, int total) {
@@ -53,88 +64,83 @@ public class GradeCalculator {
         }
 
         public void addMidterm(int score, int total) {
-            this.midterm = new Exam(score, total);
+            this.midterm = new Exam(total, score);
         }
 
         public void addLabExam(int examNumber, int score, int total) {
             if (examNumber == 1) {
-                this.labExam1 = new LabExam(score, total);
+                this.labExam1 = new LabExam(total, score);
             } else if (examNumber == 2) {
-                this.labExam2 = new LabExam(score, total);
+                this.labExam2 = new LabExam(total, score);
             } else {
                 System.out.println("Invalid exam number");
             }
         }
 
         public void addFinalExam(int score, int total) {
-            this.finalExam = new Exam(score, total);
+            this.finalExam = new Exam(total, score);
         }
 
         public double getFinalGrade() {
-            double assignmentcalculation = 0;
-            double scoreassigmentcalculation = 0;
-            double totalassigmentcalculation = 0;
-            for (Assignment assignments:assignments){
-                scoreassigmentcalculation += assignments.getScore();
-                totalassigmentcalculation += assignments.getTotal();
+            double totalAssignmentScore = 0;
+            double totalAssignmentMax = 0;
 
+            // Calculate total score and total max for assignments
+            for (Assignment assignment : assignments) {
+                totalAssignmentScore += assignment.getScore();
+                totalAssignmentMax += assignment.getTotal();
             }
-            assignmentcalculation = scoreassigmentcalculation / totalassigmentcalculation;
 
-            double scorequizcalculation = 0;
-            double totalquizcalculation = 0;
-            double quizcalculation = 0;
-            for (Quiz quizzes : quizzes){
-                scorequizcalculation += quizzes.getScore();
-                totalquizcalculation += quizzes.getTotal();
+            double assignmentPercentage =  (totalAssignmentMax /totalAssignmentScore ) * 100;
+
+            double totalQuizScore = 0;
+            double totalQuizMax = 0;
+
+            // Calculate total score and total max for quizzes
+            for (Quiz quiz : quizzes) {
+                totalQuizScore += quiz.getScore();
+                totalQuizMax += quiz.getTotal();
             }
-            quizcalculation = scorequizcalculation / totalquizcalculation;
-            
-            double finalGrade = (assignmentcalculation * 0.15) + (quizcalculation * 0.05) + (labExam1.getPercentage() * 0.05) +
-                    (labExam2.getPercentage() * 0.15) + (midterm.getPercentage() * 0.15) + (finalExam.getPercentage() * 0.45);
-            return finalGrade;
-        }
 
-        public String getCourseName() {
-            return this.courseName;
+            double quizPercentage = (totalQuizMax / totalQuizScore) * 100;
+
+            double labExam1Percentage = (labExam1 == null) ? 0 : labExam1.getPercentage();
+            double labExam2Percentage = (labExam2 == null) ? 0 : labExam2.getPercentage();
+            double midtermPercentage = (midterm == null) ? 0 : midterm.getPercentage();
+            double finalExamPercentage = (finalExam == null) ? 0 : finalExam.getPercentage();
+
+            return (assignmentPercentage * 0.15) +
+                   (quizPercentage * 0.05) +
+                   (labExam1Percentage * 0.05) +
+                   (labExam2Percentage * 0.15) +
+                   (midtermPercentage * 0.15) +
+                   (finalExamPercentage * 0.45);
         }
 
         @Override
         public String toString() {
-        String result = "Course: " + courseName + "\nAssignments:\n";
-
-           // Iterate through assignments
-        for (Assignment assignment : assignments) {
-            result += (assignment.toString()) + ("\n");
+            String result = "Course: " + courseName + "\nAssignments:\n";
+            for (Assignment assignment : assignments) {
+                result += assignment.toString() + "\n";
+            }
+            result += "Quizzes:\n";
+            for (Quiz quiz : quizzes) {
+                result += quiz.toString() + "\n";
+            }
+            if (midterm != null) {
+                result += "Midterm: " + midterm + "\n";
+            }
+            if (labExam1 != null) {
+                result += "Lab Exam 1: " + labExam1 + "\n";
+            }
+            if (labExam2 != null) {
+                result += "Lab Exam 2: " + labExam2  + "\n";
+            }
+            if (finalExam != null) {
+                result += "Final Exam: " + finalExam + "\n";
+            }
+            return result;
         }
-
-        // Iterate through quizzes
-        result +=("Quizzes:\n");
-        for (Quiz quiz : quizzes) {
-            result += (quiz.toString()) + ("\n");
-        }
-
-        // Print Midterm
-        if (midterm != null) {
-            result += ("Midterm: ") + (midterm.toString()) + ("\n");
-        }
-
-        // Print Lab Exams
-        if (labExam1 != null) {
-            result += ("Lab Exam 1: ")+ (labExam1.toString()) + ("\n");
-        }
-        if (labExam2 != null) {
-            result+= ("Lab Exam 2: ") + (labExam2.toString()) + ("\n");
-        }
-
-        // Print Final Exam
-        if (finalExam != null) {
-            result += ("Final Exam: ") + (finalExam.toString()) + ("\n");
-        }
-
-        return result.toString();
-    }
-
     }
 
     static class Assessment {
@@ -193,16 +199,10 @@ public class GradeCalculator {
                 return (score / (double) total) * 100;
             }
         }
-    }
-
-    static class Midterm extends Exam {
-        public Midterm(int total, int score) {
-            super(total, score);
-        }
 
         @Override
         public String toString() {
-            return "Midterm: "  + getPercentage();
+            return "Exam: " + score + "/" + total + " (" + getPercentage() + "%)";
         }
     }
 
@@ -210,18 +210,10 @@ public class GradeCalculator {
         public LabExam(int total, int score) {
             super(total, score);
         }
+
         @Override
         public String toString() {
-            return "Lab Exam: " + getPercentage();
-        }
-    }
-    static class FinalExam extends Exam {
-        public FinalExam(int total, int score) {
-            super(total, score);
-        }
-        @Override
-        public String toString() {
-            return "Final Exam: " + getPercentage();
+            return "Lab Exam: " + getPercentage() + "%";
         }
     }
 }
