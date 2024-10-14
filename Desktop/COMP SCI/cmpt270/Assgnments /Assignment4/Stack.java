@@ -1,48 +1,112 @@
 import java.util.ArrayList;
-public class Stack <I> implements StackOperations <I>{
-   private ArrayList<I> Object;
 
+public class Stack<I> implements StackOperations<I> {
+    private ArrayList<I> object;  // Corrected the field name to lowercase 'object'
 
-  /**
+    /**
      * Constructor for Stack
      * Create new ArrayList
      */
-    public Stack()
-    {
-        Object = new ArrayList<I>();
+    public Stack() {
+        object = new ArrayList<I>();
     }
 
-
+    /**
+     * Add item to top of the Stack
+     * @param item the item to be added
+     */
     @Override
-    public void push(Object item) {
-        Object.add((I) item);
+    public void push(I item) {
+        object.add(item);  // Corrected cast and added proper generics
     }
 
+    /**
+     * Removes item from the top of the Stack
+     */
     @Override
     public void pop() {
-        Object.remove(Object.size() -1);
-
+        if (!object.isEmpty()) {
+            object.remove(object.size() - 1);  // Removes the last element in the stack
+        }
     }
 
+    /**
+     * Gets item at the top of the Stack
+     */
     @Override
     public I peek() {
-        return Object.getFirst();
+        if (!object.isEmpty()) {
+            return object.get(object.size() - 1);  // Returns the last element in the stack
+        }
+        return null;  // Return null if stack is empty
     }
 
+    /**
+     * Returns size of items in the Stack
+     */
     @Override
     public int size() {
-        return Object.size();
-
+        return object.size();
     }
 
+    /**
+     * Returns True if Stack is empty and False if not
+     */
     @Override
     public boolean isEmpty() {
-        if (Object.size() == 0){
-            return true;
-        }
-        else return false;
+        return object.isEmpty();  // Simplified return statement
     }
 }
 
+
 public void main() {
+
+     Stack<Integer> s = new Stack<>();
+
+        /* Testing Constructor */
+        if (s.object == null) {
+            System.out.println("Error: Stack should be initialized empty.");
+        }
+
+        /* Testing Push */
+        s.push(1);
+        if (s.peek() != 1) {
+            System.out.println("Error: Stack not pushing items properly.");
+        }
+        if (s.size() != 1) {
+            System.out.println("Error: Stack not updating size after pushing items.");
+        }
+
+        s.push(2);
+        s.push(3);
+        if (s.peek() != 3) {
+            System.out.println("Error: Stack not pushing items properly.");
+        }
+        if (s.size() != 3) {
+            System.out.println("Error: Stack size incorrect after multiple pushes.");
+        }
+
+        /* Testing Pop */
+        s.pop();
+        if (s.peek() != 2) {
+            System.out.println("Error: Stack not popping items properly.");
+        }
+        if (s.size() != 2) {
+            System.out.println("Error: Stack size incorrect after popping.");
+        }
+
+        s.pop();
+        s.pop();
+        if (!s.isEmpty()) {
+            System.out.println("Error: Stack should be empty after popping all items.");
+        }
+
+        /* Testing isEmpty */
+        if (!s.isEmpty()) {
+            System.out.println("Error: Stack isEmpty method not working correctly.");
+        }
+
+
+
+
 }
