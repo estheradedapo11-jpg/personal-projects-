@@ -1,26 +1,48 @@
-public class Stack implements StackOperations{
+import java.util.ArrayList;
+public class Stack <I> implements StackOperations <I>{
+   private ArrayList<I> Object;
+
+
+  /**
+     * Constructor for Stack
+     * Create new ArrayList
+     */
+    public Stack()
+    {
+        Object = new ArrayList<I>();
+    }
+
+
     @Override
     public void push(Object item) {
-        
+        Object.add((I) item);
     }
 
     @Override
     public void pop() {
+        Object.remove(Object.size() -1);
 
     }
 
     @Override
-    public Object peek() {
-        return null;
+    public I peek() {
+        return Object.getFirst();
     }
 
     @Override
     public int size() {
-        return 0;
+        return Object.size();
+
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        if (Object.size() == 0){
+            return true;
+        }
+        else return false;
     }
+}
+
+public void main() {
 }
