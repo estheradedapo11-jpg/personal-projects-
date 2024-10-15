@@ -1,14 +1,24 @@
-import java.util.ArrayList;
+/**
+ * Esther Adedapo
+ * NSID: fxy319
+ * Student Number: 11366614
+ * Instructor: Kemin Wang
+ * Lecture Section: L01
+ */
 
-public class Stack<I> implements StackOperations<I> {
-    private ArrayList<I> object;  // Corrected the field name to lowercase 'object'
+import java.util.LinkedList;
+
+
+
+public static class Stack<I> implements StackOperations<I> {
+    private LinkedList<I> object;  // Corrected the field name to lowercase 'object'
 
     /**
      * Constructor for Stack
      * Create new ArrayList
      */
     public Stack() {
-        object = new ArrayList<I>();
+        object = new LinkedList<>();
     }
 
     /**
@@ -17,7 +27,7 @@ public class Stack<I> implements StackOperations<I> {
      */
     @Override
     public void push(I item) {
-        object.add(item);  // Corrected cast and added proper generics
+        object.addLast(item);  // Corrected cast and added proper generics
     }
 
     /**
@@ -26,7 +36,7 @@ public class Stack<I> implements StackOperations<I> {
     @Override
     public void pop() {
         if (!object.isEmpty()) {
-            object.remove(object.size() - 1);  // Removes the last element in the stack
+            object.removeLast();  // Removes the last element in the stack
         }
     }
 
@@ -36,7 +46,7 @@ public class Stack<I> implements StackOperations<I> {
     @Override
     public I peek() {
         if (!object.isEmpty()) {
-            return object.get(object.size() - 1);  // Returns the last element in the stack
+            return object.getLast();  // Returns the last element in the stack
         }
         return null;  // Return null if stack is empty
     }
