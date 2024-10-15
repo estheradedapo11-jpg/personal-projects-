@@ -9,7 +9,7 @@
 public class Achievement {
     private String achievementName;
     private String achievementDescription;
-    private boolean isUnlocked;
+    protected boolean isUnlocked;
 
 
     public Achievement(String achievementName, String achievementDescription) {
@@ -24,6 +24,10 @@ public class Achievement {
 
     public String getAchievementDescription() {
         return achievementDescription;
+    }
+
+    public boolean isUnlocked() {
+        return isUnlocked;
     }
 
 
