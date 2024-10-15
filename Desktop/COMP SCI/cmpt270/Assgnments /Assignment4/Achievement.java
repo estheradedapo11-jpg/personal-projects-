@@ -22,15 +22,27 @@ public class Achievement {
         return achievementName;
     }
 
-    public String getAchievementDescription() {}
+    public String getAchievementDescription() {
+        return achievementDescription;
+    }
 
 
-    public boolean checkUnlocked() {}
+    public boolean checkUnlocked() {
+        if (isUnlocked == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    public void unlockAchievement() {}
+    public void unlockAchievement() {
+        isUnlocked = true;
+    }
 
     @Override
-    public String toString() {}
+    public String toString() {
+        return achievementName + " " + achievementDescription;
+    }
 
     public static void main(String[] args) {
         // Create an achievement
@@ -70,4 +82,4 @@ public class Achievement {
 
 
 
-}
+
