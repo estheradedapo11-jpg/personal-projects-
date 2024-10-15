@@ -1,0 +1,73 @@
+/**
+ * Esther Adedapo
+ * NSID: fxy319
+ * Student Number: 11366614
+ * Instructor: Kemin Wang
+ * Lecture Section: L01
+ */
+
+public class Achievement {
+    private String achievementName;
+    private String achievementDescription;
+    private boolean isUnlocked;
+
+
+    public Achievement(String achievementName, String achievementDescription) {
+        this.achievementName = achievementName;
+        this.achievementDescription = achievementDescription;
+
+    }
+
+    public String getAchievementName() {
+        return achievementName;
+    }
+
+    public String getAchievementDescription() {}
+
+
+    public boolean checkUnlocked() {}
+
+    public void unlockAchievement() {}
+
+    @Override
+    public String toString() {}
+
+    public static void main(String[] args) {
+        // Create an achievement
+        Achievement achievement = new Achievement("Master Coder", "Complete 100 coding challenges.");
+
+        // Test getAchievementName
+        if (!achievement.getAchievementName().equals("Master Coder")) {
+            System.out.println("Test failed: getAchievementName()");
+        }
+
+        // Test getAchievementDescription
+        if (!achievement.getAchievementDescription().equals("Complete 100 coding challenges.")) {
+            System.out.println("Test failed: getAchievementDescription()");
+        }
+
+        // Test checkUnlocked (should be false initially)
+        if (achievement.checkUnlocked()) {
+            System.out.println("Test failed: checkUnlocked() - expected false");
+        }
+
+        // Unlock the achievement
+        achievement.unlockAchievement();
+
+        // Test checkUnlocked (should be true after unlocking)
+        if (!achievement.checkUnlocked()) {
+            System.out.println("Test failed: checkUnlocked() - expected true after unlocking");
+        }
+
+        // Test toString()
+        String expectedString = "Achievement{achievementName='Master Coder', achievementDescription='Complete 100 coding challenges.', isUnlocked=true}";
+        if (!achievement.toString().equals(expectedString)) {
+            System.out.println("Test failed: toString()");
+        }
+    }
+
+    }
+
+
+
+}
