@@ -45,7 +45,8 @@ public class Achievement {
 
     @Override
     public String toString() {
-        return achievementName + " " + achievementDescription;
+        return "Name:" + achievementName + "," + "Description:" + achievementDescription + "," +
+                "Is it Unlocekd, Yes or No?:" + isUnlocked;
     }
 
     public static void main(String[] args) {

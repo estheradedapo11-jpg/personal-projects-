@@ -114,17 +114,20 @@ public class AchievementManager {
         return keys;
     }
 
+
     /**
      * Returns a string representation of the AchievementManager object
      * Should display each achievement with its associated id
      * @return the string representation
      */
-    public String toString()
-    {
-        // todo: implement the toString method
+    public String toString() {
+        String result = null;
+        for (Integer id : achievements.keySet()) {
+            Achievement achievement = achievements.get(id);
+            result = "ID" + id + "-" + achievements.toString();
+        }
 
-        // this return statement is here for stub purposes. Replace with actual return string
-        return "";
+        return result;
     }
 
     /**
