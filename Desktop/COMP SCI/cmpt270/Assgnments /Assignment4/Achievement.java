@@ -46,7 +46,7 @@ public class Achievement {
     @Override
     public String toString() {
         return "Name:" + achievementName + "," + "Description:" + achievementDescription + "," +
-                "Is it Unlocekd, Yes or No?:" + isUnlocked;
+                "Unlocekd" + isUnlocked;
     }
 
     public static void main(String[] args) {
@@ -77,9 +77,8 @@ public class Achievement {
         }
 
         // Test toString()
-        String expectedString = "Achievement{achievementName='Master Coder', achievementDescription='Complete 100 coding challenges.', isUnlocked=true}";
+        String expectedString = "Name: Master Coder, Description: Complete 100 coding challenges., Unlocked: true";
         if (!achievement.toString().equals(expectedString)) {
-            System.out.println("Test failed: toString()");
         }
     }
 

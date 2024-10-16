@@ -31,7 +31,11 @@ public class AchievementManager {
      * @throws IllegalArgumentException if achievement is null
      */
     public void addAchievement(Achievement achievement) throws IllegalArgumentException {
-       achievement = new Achievement(achievement.getAchievementName(), achievement.getAchievementDescription());
+       if (achievement == null){
+           throw new IllegalArgumentException("Achievement cannot be null");
+       }
+       int id= achievements.size();
+       achievements.put(id, achievement);
     }
 
     /**
@@ -42,7 +46,10 @@ public class AchievementManager {
      */
     public Achievement getAchievement(int id) throws IllegalArgumentException
     {
-	return achievements.get(id);
+        if (!achievements.containsKey(id)) {
+            throw new IllegalArgumentException("Achievement with id " + id + " does not exist");
+        }
+        return achievements.get(id);
     }
 
     /**
@@ -121,22 +128,108 @@ public class AchievementManager {
      * @return the string representation
      */
     public String toString() {
-        String result = null;
+        StringBuilder result = new StringBuilder();
         for (Integer id : achievements.keySet()) {
             Achievement achievement = achievements.get(id);
-            result = "ID" + id + "-" + achievements.toString();
+           result.giappend(("ID")).append(id).append("-").append(achievement.toString()).append("\n");
         }
 
-        return result;
+        return result.toString();
     }
 
     /**
      * Regression testing
      * @param args
      */
-    public static void main(String[] args)
-    {
-        // todo: write regression test for all of the methods that YOU had to implement
-        // there is no need to test the methods that were already implemented
+    public static void main(String[] args) {
+    // Regression Tests for AchievementManager class
+
+
+    // Create the AchievementManager
+    AchievementManager manager = new AchievementManager();
+
+    // Create test Achievements
+    Achievement achievement1 = new Achievement("Master Coder", "Complete 100 coding challenges.");
+    Achievement achievement2 = new Achievement("Bug Hunter", "Find and fix 50 bugs.");
+    Achievement achievement3 = new Achievement("Marathon Coder", "Code for 24 hours straight.");
+
+    // Test 1: addAchievement
+    try {
+        manager.addAchievement(achievement1);
+        manager.addAchievement(achievement2);
+        manager.addAchievement(achievement3);
+    } catch (IllegalArgumentException e) {
+        System.out.println("Test failed: addAchievement - " + e.getMessage());
     }
+
+    // Test 2: getAchievement
+    try {
+        Achievement retrievedAchievement1 = manager.getAchievement(0);
+        Achievement retrievedAchievement2 = manager.getAchievement(1);
+        Achievement retrievedAchievement3 = manager.getAchievement(2);
+
+        if (retrievedAchievement1.equals(achievement1) &&
+            retrievedAchievement2.equals(achievement2) &&
+            retrievedAchievement3.equals(achievement3)) {
+        } else {
+            System.out.println("Test failed: getAchievement");
+        }
+    } catch (IllegalArgumentException e) {
+        System.out.println("Test failed: getAchievement - " + e.getMessage());
+    }
+
+    // Test 3: getLockedAchievements (assuming all achievements are locked initially)
+    List<Achievement> lockedAchievements = manager.getLockedAchievements();
+    if (lockedAchievements.size() == 3) {
+    } else {
+        System.out.println("Test failed: getLockedAchievements");
+    }
+
+    // Test 4: Unlock one achievement and test getUnlockedAchievements
+    achievement1.unlockAchievement();  // Unlock the first achievement
+    List<Achievement> unlockedAchievements = manager.getUnlockedAchievements();
+    if (unlockedAchievements.size() == 1 && unlockedAchievements.contains(achievement1)) {
+    } else {
+        System.out.println("Test failed: getUnlockedAchievements");
+    }
+
+    // Test 5: getAllAchievements
+    List<Achievement> allAchievements = manager.getAllAchievements();
+    if (allAchievements.size() == 3 &&
+        allAchievements.contains(achievement1) &&
+        allAchievements.contains(achievement2) &&
+        allAchievements.contains(achievement3)) {
+    } else {
+        System.out.println("Test failed: getAllAchievements");
+    }
+
+    // Test 6: getAllKeys
+    List<Integer> keys = manager.getAllKeys();
+    if (keys.size() == 3 && keys.contains(0) && keys.contains(1) && keys.contains(2)) {
+
+    } else {
+        System.out.println("Test failed: getAllKeys");
+    }
+
+    // Test 7: toString
+    String managerString = manager.toString();
+    if (managerString.contains("ID0") && managerString.contains("ID1") && managerString.contains("ID2")) {
+    } else {
+        System.out.println("Test failed: toString");
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }
