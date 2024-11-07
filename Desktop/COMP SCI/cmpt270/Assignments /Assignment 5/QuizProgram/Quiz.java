@@ -9,6 +9,8 @@
 package QuizProgram;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  * Class representing a quiz with multiple questions and methods to manage quiz flow.
@@ -142,4 +144,75 @@ public class Quiz {
         return totalQuestions;
     }
 
+
+
+    public static void main(String[] args) {
+
+        // Create a list of sample questions (dummy questions for testing)
+        List<Question> sampleQuestions = new ArrayList<>();
+
+        // Assuming a Question class with constructor taking question text and answers
+        sampleQuestions.add(new Question("What is 2 + 2?", List.of("2", "3", "4", "5"), List.of("4")));
+        sampleQuestions.add(new Question("Which planet is known as the Red Planet?", List.of("Earth", "Mars", "Jupiter", "Saturn"), List.of("Mars")));
+
+        // Instantiate the Quiz object with the sample questions
+        Quiz quiz = new Quiz(sampleQuestions);
+
+        // Test: Check Initial State
+        if (quiz.getTotalQuestions() != 2) {
+            System.out.println("Test 1 Failed: Total Questions");
+        }
+        if (quiz.getCurrentQuestion() != 0) {
+            System.out.println("Test 1 Failed: Current Question");
+        }
+        if (quiz.getScore() != 0) {
+            System.out.println("Test 1 Failed: Score");
+        }
+        if (quiz.getCorrectAnswers() != 0) {
+            System.out.println("Test 1 Failed: Correct Answers");
+        }
+
+        // Test: Load questions into the quiz
+        quiz.loadQuestions(); // Placeholder for loading questions
+        // Check questions are loaded correctly (placeholder logic)
+
+        // Test: Get next question
+        Question nextQuestion = quiz.getNextQuestion();
+        if (nextQuestion == null) {
+            System.out.println("Test 3 Failed: Get Next Question");
+        } else if (!nextQuestion.getQuestionText().equals("What is 2 + 2?")) {
+            System.out.println("Test 3 Failed: Get Next Question - Incorrect Question");
+        }
+
+        // Test: Check if the quiz is complete
+        if (quiz.checkIfQuizComplete()) {
+            System.out.println("Test 4 Failed: Check If Quiz Complete");
+        }
+
+        // Test: Calculate score
+        if (quiz.calculateScore() != 0) {
+            System.out.println("Test 5 Failed: Calculate Score");
+        }
+
+        // Test: Calculate percentage
+        if (quiz.calculatePercentage() != 0) {
+            System.out.println("Test 6 Failed: Calculate Percentage");
+        }
+
+        // Test: Display results
+        quiz.displayResults(); // Placeholder for displaying results
+
+        // Test: Move to the next question
+        quiz.moveToNextQuestion(); // Placeholder for logic to move to the next question
+
+        // Test: Check answer
+        if (!quiz.checkAnswer(List.of("4"))) {
+            System.out.println("Test 9 Failed: Check Answer - Incorrect Answer");
+        }
+
+        // Test: Check answer with multiple correct answers
+        if (!quiz.checkAnswer(List.of("Mars"))) {
+            System.out.println("Test 10 Failed: Check Answer with Multiple Correct Answers");
+        }
+    }
 }
