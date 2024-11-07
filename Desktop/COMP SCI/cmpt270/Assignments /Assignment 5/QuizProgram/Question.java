@@ -9,7 +9,6 @@
 package QuizProgram;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Represents a question in a quiz, including the question text,
@@ -40,14 +39,19 @@ public class Question {
      * @param correctAnswers A list of correct answers.
      */
     public Question(String questionText, List<String> answerOptions, List<String> correctAnswers) {
-        //
+        this.questionText = questionText;
+        this.answerOptions = answerOptions;
+        this.correctAnswers = correctAnswers;
     }
 
     /**
      * Displays the question along with its answer options.
      */
     public void displayQuestion() {
-
+        System.out.println("Question: " + questionText);
+        for (int i = 0; i < answerOptions.size(); i++) {
+            System.out.println((i + 1) + ". " + answerOptions.get(i));
+        }
     }
 
     /**
@@ -56,20 +60,28 @@ public class Question {
      * @return A list of correct answers.
      */
     public List<String> getCorrectAnswers() {
-        return null ;  // placehplder
+        return correctAnswers;
     }
 
-
+    /**
+     * Returns the question text.
+     *
+     * @return The question text.
+     */
     public String getQuestionText() {
-         return null ;  // placehplder
+        return questionText;
     }
 
+    /**
+     * Returns the list of answer options for the question.
+     *
+     * @return A list of answer options.
+     */
     public List<String> getAnswerOptions() {
-         return null ;  // placehplder
+        return answerOptions;
     }
 
     public static void main(String[] args) {
-
         // Test 1: Create a new question and check if questionText is set correctly
         List<String> options = List.of("A", "B", "C", "D");
         List<String> correctAnswers = List.of("B");

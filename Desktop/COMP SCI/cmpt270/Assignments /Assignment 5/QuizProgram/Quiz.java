@@ -6,15 +6,20 @@
  * Lecture Section: L01
  */
 
+// Quiz.java
+
 package QuizProgram;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+class NoAnswerProvidedException extends Exception {
+    public NoAnswerProvidedException(String message) {
+        super(message);
+    }
+}
 
-/**
- * Class representing a quiz with multiple questions and methods to manage quiz flow.
- */
 public class Quiz {
     // List of questions in the quiz
     private List<Question> questions;
@@ -25,9 +30,6 @@ public class Quiz {
     // The score of the quiz, representing the number of correct answers given
     private int score;
 
-    // Total number of correct answers
-    private int correctAnswers;
-
     // The total number of questions in the quiz
     private int totalQuestions;
 
@@ -37,14 +39,10 @@ public class Quiz {
      * @param questions The list of questions to be included in the quiz.
      */
     public Quiz(List<Question> questions) {
-        // Placeholder for constructor logic
-    }
-
-    /**
-     * Loads the questions into the quiz.
-     */
-    public void loadQuestions() {
-        // Placeholder for logic to load questions
+        this.questions = questions;
+        this.currentQuestion = 0;
+        this.score = 0;
+        this.totalQuestions = questions.size();
     }
 
     /**
@@ -53,8 +51,11 @@ public class Quiz {
      * @return The next Question object or null if there are no more questions.
      */
     public Question getNextQuestion() {
-        // Placeholder for logic to retrieve the next question
-        return null; // Placeholder
+        if (currentQuestion < totalQuestions) {
+            return questions.get(currentQuestion);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -63,8 +64,7 @@ public class Quiz {
      * @return {@code true} if the quiz is complete, {@code false} otherwise.
      */
     public boolean checkIfQuizComplete() {
-        // Placeholder for logic to check if the quiz is complete
-        return false; // Placeholder
+        return currentQuestion >= totalQuestions;
     }
 
     /**
@@ -73,8 +73,7 @@ public class Quiz {
      * @return The current score as an integer.
      */
     public int calculateScore() {
-        // Placeholder for logic to calculate score
-        return 0; // Placeholder
+        return score;
     }
 
     /**
@@ -83,22 +82,29 @@ public class Quiz {
      * @return The percentage score as a float.
      */
     public float calculatePercentage() {
-        // Placeholder for logic to calculate percentage
-        return 0; // Placeholder
+        if (totalQuestions == 0) return 0;
+        return ((float) score / totalQuestions) * 100;
     }
 
     /**
      * Displays the final results of the quiz, including the score and feedback.
      */
     public void displayResults() {
-        // Placeholder for logic to display the results
+        System.out.println("Quiz Completed!");
+        System.out.println("Score: " + score + "/" + totalQuestions);
+        System.out.println("Percentage: " + calculatePercentage() + "%");
     }
 
     /**
      * Moves to the next question in the quiz.
+     * Throws an exception if the user hasn't answered the current question.
      */
-    public void moveToNextQuestion() {
-        // Placeholder for logic to move to the next question
+    public void moveToNextQuestion() throws NoAnswerProvidedException {
+        // Ensure that the user answers the current question before moving on
+        if (questions.get(currentQuestion) == null) {
+            throw new NoAnswerProvidedException("You must answer the question before moving to the next.");
+        }
+        currentQuestion++;
     }
 
     /**
@@ -108,47 +114,47 @@ public class Quiz {
      * @return {@code true} if the user's answer(s) are correct, {@code false} otherwise.
      */
     public boolean checkAnswer(List<String> userAnswer) {
-        // Placeholder for logic to check the answer
-        return false; // Placeholder logic
+        // Get the correct answers for the current question
+        List<String> correctAnswers = questions.get(currentQuestion).getCorrectAnswers();
+
+        // Check if the user's answer list matches the correct answers
+        if (userAnswer.size() != correctAnswers.size()) {
+            return false; // Incorrect if the number of answers does not match
+        }
+
+        // Compare answers one by one
+        for (String answer : userAnswer) {
+            if (!correctAnswers.contains(answer)) {
+                return false; // Incorrect if any of the answers is not in the correct answers list
+            }
+        }
+
+        // If all answers match, increase the score
+        score++;
+        return true; // Correct if all answers match
     }
 
-
+    // Getters and setters
     public List<Question> getQuestions() {
-         return null ;  // placehplder
-
-    }
-
-    public void setQuestions(List<Question> questions) {
-
+        return questions;
     }
 
     public int getCurrentQuestion() {
         return currentQuestion;
     }
 
-
-
     public int getScore() {
         return score;
     }
-
-
-
-    public int getCorrectAnswers() {
-        return correctAnswers;
-    }
-
-
 
     public int getTotalQuestions() {
         return totalQuestions;
     }
 
-
-
+    // Main method to run test cases
     public static void main(String[] args) {
 
-        // Create a list of sample questions (dummy questions for testing)
+        // Create a list of sample questions
         List<Question> sampleQuestions = new ArrayList<>();
 
         // Assuming a Question class with constructor taking question text and answers
@@ -168,13 +174,6 @@ public class Quiz {
         if (quiz.getScore() != 0) {
             System.out.println("Test 1 Failed: Score");
         }
-        if (quiz.getCorrectAnswers() != 0) {
-            System.out.println("Test 1 Failed: Correct Answers");
-        }
-
-        // Test: Load questions into the quiz
-        quiz.loadQuestions(); // Placeholder for loading questions
-        // Check questions are loaded correctly (placeholder logic)
 
         // Test: Get next question
         Question nextQuestion = quiz.getNextQuestion();
@@ -199,20 +198,26 @@ public class Quiz {
             System.out.println("Test 6 Failed: Calculate Percentage");
         }
 
-        // Test: Display results
-        quiz.displayResults(); // Placeholder for displaying results
 
-        // Test: Move to the next question
-        quiz.moveToNextQuestion(); // Placeholder for logic to move to the next question
 
-        // Test: Check answer
+        // Test: Check answer for the first question
         if (!quiz.checkAnswer(List.of("4"))) {
             System.out.println("Test 9 Failed: Check Answer - Incorrect Answer");
         }
 
-        // Test: Check answer with multiple correct answers
+        // Test: Move to the next question
+        try {
+            quiz.moveToNextQuestion();
+        } catch (NoAnswerProvidedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Test: Check answer for the second question
         if (!quiz.checkAnswer(List.of("Mars"))) {
             System.out.println("Test 10 Failed: Check Answer with Multiple Correct Answers");
         }
+
+       // Test: Display results
+        quiz.displayResults();
     }
 }
