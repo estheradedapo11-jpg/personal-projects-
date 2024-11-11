@@ -1,3 +1,10 @@
+/**
+ * Esther Adedapo
+ * NSID: fxy319
+ * Student Number: 11366614
+ * Instructor: Kemin Wang
+ * Lecture Section: L01
+ */
 package GUI;
 
 import QuizProgram.NoAnswerProvidedException;
@@ -17,7 +24,8 @@ public class CourseFrame extends JFrame {
     private int currentQuestionIndex;
     private JLabel questionLabel;
     private ButtonGroup optionsGroup;
-    private List<List<String>> selectedAnswers; // Store answers for each question
+    private JPanel optionsPanel;
+    private List<String> selectedAnswers; // Store one answer per question
 
     public CourseFrame() {
         // Sample questions (replace with dynamic data later)
@@ -49,7 +57,7 @@ public class CourseFrame extends JFrame {
         add(questionLabel, BorderLayout.NORTH);
 
         // Create panel for options
-        JPanel optionsPanel = new JPanel();
+        optionsPanel = new JPanel();
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
         add(optionsPanel, BorderLayout.CENTER);
 
@@ -64,41 +72,34 @@ public class CourseFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get selected answer
-                List<String> currentAnswers = new ArrayList<>();
-
-                // Iterate over the ButtonGroup's elements using Enumeration
+                String selectedAnswer = null;
                 var elements = optionsGroup.getElements();
                 while (elements.hasMoreElements()) {
                     AbstractButton button = elements.nextElement();
                     if (button.isSelected()) {
-                        currentAnswers.add(button.getText());
+                        selectedAnswer = button.getText();
+                        break;
                     }
                 }
 
-                // Store the answer for the current question
-                if (!currentAnswers.isEmpty()) {
-                    selectedAnswers.add(currentAnswers); // Store the answers for the current question
-                    try {
-                        quiz.moveToNextQuestion();  // Move to next question
-                    } catch (NoAnswerProvidedException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                } else {
+                // Ensure an answer is provided
+                if (selectedAnswer == null) {
                     JOptionPane.showMessageDialog(CourseFrame.this, "Please select an answer.");
                     return;
                 }
 
-                // Move to next question
-                currentQuestionIndex++;
+                // Store the answer for the current question
+                selectedAnswers.add(selectedAnswer);
 
-                // Check if there are more questions, or if it's the last one
-                if (currentQuestionIndex < quiz.getTotalQuestions()) {
+                // Check if this is the last question
+                if (currentQuestionIndex < quiz.getTotalQuestions() - 1) {
+                    currentQuestionIndex++;
                     updateQuestion();  // Update the GUI with the next question
                 } else {
-                    // Once all questions are answered, show the results
+                    // Calculate the final score
                     int score = 0;
                     for (int i = 0; i < selectedAnswers.size(); i++) {
-                        if (quiz.checkAnswer(selectedAnswers.get(i))) {
+                        if (quiz.getQuestions().get(i).getCorrectAnswers().contains(selectedAnswers.get(i))) {
                             score++;
                         }
                     }
@@ -113,7 +114,22 @@ public class CourseFrame extends JFrame {
         setVisible(true);
     }
 
-   
+    private void updateQuestion() {
+        // Update the question label and options
+        questionLabel.setText("Question " + (currentQuestionIndex + 1) + ": " + quiz.getQuestions().get(currentQuestionIndex).getQuestionText());
+        optionsPanel.removeAll();
+        optionsGroup.clearSelection();
+
+        List<String> options = quiz.getQuestions().get(currentQuestionIndex).getAnswerOptions();
+        for (String option : options) {
+            JRadioButton radioButton = new JRadioButton(option);
+            optionsGroup.add(radioButton);
+            optionsPanel.add(radioButton);
+        }
+
+        optionsPanel.revalidate();
+        optionsPanel.repaint();
+    }
 
     public static void main(String[] args) {
         // Create and show the GUI
