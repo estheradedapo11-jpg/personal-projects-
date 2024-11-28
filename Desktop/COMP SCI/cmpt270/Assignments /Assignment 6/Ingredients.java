@@ -1,6 +1,6 @@
 public enum Ingredients {
     Strawberry;
-    Grapes;
-    Lemon;
-    Pineapples;
+   public static Ingredients Grapes;
+   public Ingredients Lemon;
+   public static Ingredients Pineapples;
 }

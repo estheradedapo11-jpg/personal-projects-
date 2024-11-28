@@ -1,6 +1,6 @@
 public enum PotionNames {
     FAILED;
-    LEMONBERRY;
-    GRAPEAPPLE;
-    BERRYAPPLE;
+    public static PotionNames LEMONBERRY;
+    public static PotionNames GRAPEAPPLE;
+    public static PotionNames BERRYAPPLE;
 }
