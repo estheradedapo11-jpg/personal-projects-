@@ -1,6 +1,13 @@
+/**
+ * Esther Adedapo
+ * NSID: fxy319
+ * Student Number: 11366614
+ * Instructor: Kemin Wang
+ * Lecture Section: L01
+ */
 public enum Ingredients {
-    Strawberry;
-   public static Ingredients Grapes;
-   public Ingredients Lemon;
-   public static Ingredients Pineapples;
+    Strawberry,
+    Grapes,
+    Lemon,
+    Pineapples;
 }

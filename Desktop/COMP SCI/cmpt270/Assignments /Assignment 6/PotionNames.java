@@ -1,6 +1,14 @@
+/**
+ * Esther Adedapo
+ * NSID: fxy319
+ * Student Number: 11366614
+ * Instructor: Kemin Wang
+ * Lecture Section: L01
+ */
+
 public enum PotionNames {
-    FAILED;
-    public static PotionNames LEMONBERRY;
-    public static PotionNames GRAPEAPPLE;
-    public static PotionNames BERRYAPPLE;
+    FAILED,
+    LEMONBERRY,
+    GRAPEAPPLE,
+    BERRYAPPLE;
 }
