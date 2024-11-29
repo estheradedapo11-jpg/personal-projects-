@@ -6,8 +6,7 @@
  * Lecture Section: L01
  */
 public enum Ingredients {
-    Strawberry,
-    Grapes,
-    Lemon,
-    Pineapples;
+    Lemon, Strawberry, Grape, Apple, Berry, Mint
 }
+
+

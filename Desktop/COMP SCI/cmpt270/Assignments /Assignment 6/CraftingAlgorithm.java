@@ -1,3 +1,5 @@
+
+
 /**
  * Esther Adedapo
  * NSID: fxy319
@@ -6,14 +8,19 @@
  * Lecture Section: L01
  */
 
-import java.util.List;
+import java.util.ArrayList;
 
+/**
+ *
+ * The CraftingAlgorithm interface defines the method for crafting a potion based on a list of ingredients.
+ */
 public interface CraftingAlgorithm {
+
     /**
-     * Craft a potion based on the provided list of ingredients.
-     * @param providedIngredients the ingredients given by the user
-     * @param requiredIngredients the ingredients required for the potion
-     * @return the crafted Potion or null if crafting fails
+     * Crafts a potion based on the provided ingredients.
+     *
+     * @param ingredients The list of ingredients used in crafting the potion.
+     * @return The crafted potion or a failed potion if the recipe does not match.
      */
-    Potion craftPotion(List<Ingredients> providedIngredients, List<Ingredients> requiredIngredients);
+    Potion craftPotion(ArrayList<Ingredients> ingredients);
 }

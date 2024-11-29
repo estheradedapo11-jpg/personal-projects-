@@ -1,3 +1,5 @@
+
+
 /**
  * Esther Adedapo
  * NSID: fxy319
@@ -7,24 +9,44 @@
  */
 
 
-import java.util.List;
+import java.util.ArrayList;
 
+/**
+ * The LooseMatch class implements a crafting algorithm where extra ingredients are ignored,
+ * and it checks if the required ingredients are present to craft a potion.
+ */
 public class LooseMatch implements CraftingAlgorithm {
+    private ArrayList<Ingredients> recipe;
+
+    /**
+     * Constructs a LooseMatch algorithm with the given recipe.
+     *
+     * @param recipe The list of ingredients required to craft the potion.
+     */
+    public LooseMatch(ArrayList<Ingredients> recipe) {
+        this.recipe = recipe;
+    }
+
+    /**
+     * Crafts a potion based on the loose matching algorithm, where extra ingredients are ignored,
+     * but required ingredients must be present.
+     *
+     * @param ingredients The list of ingredients to use in crafting the potion.
+     * @return The crafted potion or a failed potion if no match is found.
+     */
     @Override
-    public Potion craftPotion(List<Ingredients> providedIngredients, List<Ingredients> requiredIngredients) {
-        for (Ingredients required : requiredIngredients) {
-            if (!providedIngredients.contains(required)) {
-                return new FailedPotion(0);
+    public Potion craftPotion(ArrayList<Ingredients> ingredients) {
+        // Ignore extra ingredients and check if required ones are present
+        if (ingredients.containsAll(recipe)) {
+            // Return the specific potion based on the ingredients
+            if (ingredients.contains(Ingredients.Lemon) && ingredients.contains(Ingredients.Strawberry)) {
+                return new LemonBerry(120);  // Match for LemonBerryPotion
+            } else if (ingredients.contains(Ingredients.Grape) && ingredients.contains(Ingredients.Apple)) {
+                return new GrapeApple(150);  // Match for GrapeApplePotion
+            } else if (ingredients.contains(Ingredients.Berry) && ingredients.contains(Ingredients.Apple)) {
+                return new BerryApple(180);  // Match for BerryApplePotion
             }
         }
-        // Match the recipe to a specific potion
-        if (requiredIngredients.containsAll(List.of(Ingredients.Strawberry, Ingredients.Lemon))) {
-            return new LemonBerry(200);
-        } else if (requiredIngredients.containsAll(List.of(Ingredients.Strawberry, Ingredients.Pineapples))) {
-            return new BerryApple(150);
-        } else if (requiredIngredients.containsAll(List.of(Ingredients.Grapes, Ingredients.Pineapples))) {
-            return new GrapeApple(120);
-        }
-        return new FailedPotion(0);
+        return new FailedPotion(0); // Return FailedPotion if no match is found
     }
 }
