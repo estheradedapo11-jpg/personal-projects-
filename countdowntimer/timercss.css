@@ -1,0 +1,146 @@
+html, body {
+  height: 100%;    
+  margin: 0;  
+  padding:0;   
+}
+
+/* Main background styling */
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, #b4ace3 20%, transparent 50%),
+    radial-gradient(circle at 70% 20%, pink 20%, transparent 50%),
+    radial-gradient(circle at 50% 70%, #4B1535 20%, transparent 50%),
+    radial-gradient(circle at 80% 60%, #71557A 20%, transparent 50%);
+  background-blend-mode: screen;
+  background-attachment: fixed;
+}
+
+/* Main page title */
+h1 {
+  font-size: 4em;
+  color: #3A345B;
+  text-align: center;
+  font-family: Papyrus, fantasy;
+}
+
+/* Countdown form styling */
+#formcountdown {
+  background-color: lch(82.98% 20.7 345.33);
+  border: 3px solid rgba(225, 225, 225, 0.5);
+  padding: 15px;
+  margin: 20px;
+  border-radius: 20px;
+  width: 300px;
+  color: #3A345B;
+  font-family: Papyrus, fantasy;
+}
+
+/* Countdown display container */
+#countdowndisplay {
+  position: relative;
+  display:flex;
+  border: 7px solid white;
+  padding: 50px;
+  margin: 40px auto;
+  border-radius: 20px;
+  width: 800px;
+  gap: 35px;
+}
+
+/* Corner image */
+img {
+  position: absolute;
+  top: -95px;
+  right: -35px;
+  height: 150px;
+  width: 150px;
+}
+
+/* Individual countdown boxes */
+#countdowndisplay span {
+  font-size: 5em;
+  color: oklab(69.567% 0.23441 -0.04877);
+  font-family: Papyrus, fantasy;
+  border: 7px solid white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  min-width: 110px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Animations */
+  animation: 
+    gentleFloat 4s ease-in-out infinite,
+    softGlow 4s ease-in-out infinite alternate;
+}
+
+/* Floating animation */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Glowing animation */
+@keyframes softGlow {
+  100% {
+    box-shadow: 0 0 100px rgba(23, 2, 255, 0.7);
+  }
+}
+
+/* ------- Responsive Design Breakpoints ------- */
+
+/* Large desktop devices */
+@media screen and (min-width: 1200px) {
+  h1 { font-size: 4em; }
+}
+
+/* Small desktops */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  h1 { font-size: 3em; }
+  #countdowndisplay {
+    width: 800px;
+    gap: 20px;
+  }
+  #countdowndisplay span {
+    min-width: 120px;
+    padding: 20px 30px;
+    font-size: 2em;
+  }
+}
+
+/* Tablets */
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 2.5em;
+  }
+  #countdowndisplay {
+    width: 300px;
+    flex-direction:column;
+    gap: 15px;
+  }
+  #countdowndisplay span {
+    min-width: 10px;
+    padding: 15px 20px;
+    font-size: 1.5em;
+  }
+}
+
+/* Small phones */
+@media screen and (max-width: 480px) {
+  h1 { font-size: 1em; }
+  #countdowndisplay {
+    width: 100px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  #countdowndisplay span {
+    min-width: 5px;
+    padding: 5px 10px;
+    font-size: 1em;
+  }
+}

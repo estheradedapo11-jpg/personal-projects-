@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title> Countdown Timer </title>
+ <link rel="stylesheet" href="timercss.css"> 
+ <script src="timer.js"></script>
+</head>
+
+<body>
+<h1> <strong> Counting Down to: CMPT Final Exam</strong> </h1>
+
+<!-- Form for Countdown-->
+<form id="formcountdown"> <h2> Configure the coundown</h2>
+
+<label for ="userexamtime"> Choose A Time and date :</label>
+<input type ="datetime-local" id="userexamtime" name="userexamtime">
+<br><br>
+
+<label for ="eventname"> Name the event:</label>
+<input type="text" id="eventname" name="eventname">
+<br><br>
+
+<input type="button" value="Start Countdown" onclick="startCountdown()">
+
+</form>
+
+
+<!-- Display for Countdown-->
+<div id="countdowndisplay">
+  <img src="clockimage.png">
+  <span id="days"><b>0D</b></span>
+  <span id="hours"><b>0H</b></span>
+  <span id="minutes"><b>0M</b></span>
+  <span id="seconds"><b>0S</b></span>
+</div>
+
+
+</body>
+</html>
