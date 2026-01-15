@@ -1,0 +1,64 @@
+p{
+    color:blue;
+    font-size:20px;
+
+}
+
+h1{
+    color:purple;
+    text-align: center;
+}
+.note{
+    color: red;
+}
+
+#main{
+    background-color: lightgray;
+    padding: 20px;
+}
+
+.box{
+    margin:20px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.card{
+    width: 200px;
+    margin: 0 auto;
+}
+
+span{
+    display: block;
+}
+
+.hidden{
+    display: none;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.container{
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
+  height: 200px;
+}
+.nav{
+  display: flex;
+  justify-content: space-between;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
