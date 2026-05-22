@@ -1,5 +1,12 @@
-# personal-projects-
-# personal-projects-
+## Projects
+
+### Countdown Timer
+A countdown timer built with HTML, CSS, and JavaScript.
+
+### Personal Portfolio Website
+A personal portfolio website built with HTML, CSS, and JavaScript
+for a class project.
+
 ## Data Analytics Learning
 
 Currently building data analytics skills towards an internship.
