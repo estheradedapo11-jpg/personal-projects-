@@ -2,7 +2,7 @@
 Building a portfolio of data analytics projects using Python, pandas, SQL, and matplotlib.
 
 - **imdb-ratings-analysis** — exploratory analysis of what factors correlate with IMDb ratings (genre, title type, release decade)
-- more projects coming soon
+- **spotify-tracks-analysis** — cleaning, SQL aggregation, and genre popularity trends across ~114,000 Spotify tracks"
 
 ## Other Projects
 
